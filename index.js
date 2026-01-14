@@ -47,5 +47,5 @@ app.get("/", (req, res) => {
 app.use("/user", userRouter);
 app.use("/blog", blogRoute);
 
-//app.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`));
+app.listen(PORT, () => console.log(`Server Started at PORT: ${PORT}`));
 module.exports = app;
