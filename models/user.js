@@ -22,12 +22,11 @@ const userSchema = new Schema({
     },
     gender: {
         type: String,
-        enum: ["MALE", "FEMALE", "OTHER"],
         required: true,
     },
     profileImageURL: {
         type: String,
-        default: "/images/default_male.png",
+        default: "/images/default_pic.png",
     }, 
     role: {
         type: String,
