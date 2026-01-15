@@ -25,11 +25,19 @@ router.post("/signup", async (req, res) => {
     try {
         const { fullName, email, password } = req.body;
         if (!fullName || !email || !password) {
-            return res.status(400).send("All fields are required.");
+            return res.render("signup", {
+                error: "All fields are required.",
+                fullName,
+                email
+            });
         }
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).send("Email already registered. Please sign in.");
+            return res.render("signup", {
+                error: "Email already registered. Please sign in.",
+                fullName,
+                email
+            });
         }
         await User.create({
             fullName,
@@ -41,9 +49,13 @@ router.post("/signup", async (req, res) => {
     catch (error) {
         console.log("Signup Error:", error);
         if (error.code === 11000) {
-            return res.status(400).send("Email already exists.");
+            return res.render("signup", {
+                error: "Email already exists.",
+            });
         }
-        return res.status(500).send("Something went wrong. Please try again.");
+        return res.render("signup", {
+            error: "Something went wrong. Please try again.",
+        });
     }
 });
 
