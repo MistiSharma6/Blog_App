@@ -23,7 +23,8 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
     try {
-        const { fullName, email, password } = req.body;
+        const { fullName, email, password, gender } = req.body;
+
         if (!fullName || !email || !password) {
             return res.render("signup", {
                 error: "All fields are required.",
@@ -39,10 +40,12 @@ router.post("/signup", async (req, res) => {
                 email
             });
         }
+
         await User.create({
             fullName,
             email,
             password,
+            gender,
         });
         return res.redirect("/");
     } 
