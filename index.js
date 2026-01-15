@@ -31,6 +31,12 @@ app.use(express.static(path.resolve("./public/images")));
 app.use(express.static(path.resolve("./public")));
 
 
+app.use((req, res, next) => {
+  console.log("➡  Incoming:", req.method, req.url);
+  next();
+});
+
+
 app.get("/", async (req, res) => {
     const allBlogs = await Blog.find({});
     res.render("home", {
@@ -39,11 +45,11 @@ app.get("/", async (req, res) => {
     });
 });
 
-app.get("/", (req, res) => {
-    res.render("home", {
-        user: req.user,
-    });
-});
+// app.get("/", (req, res) => {
+//     res.render("home", {
+//         user: req.user,
+//     });
+// });
 
 app.use("/user", userRouter);
 app.use("/blog", blogRoute);
