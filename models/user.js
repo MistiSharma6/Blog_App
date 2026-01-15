@@ -20,10 +20,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    gender: {
-        type: String,
-        required: true,
-    },
     profileImageURL: {
         type: String,
         default: "/images/default_pic.png",
